@@ -10,16 +10,16 @@
   --bg:#fff4f7; --surface:#ffffff; --blush:#ffe3ec; --petal:#ffc7d8;
   --rose:#e8789f; --deep:#c23c6f; --ink:#4b2234; --muted:#8c5a6e; --line:#f6cfdc;
   --warn:#b4452b;
-  --dayp:#fff3f6; --nightp:#f6e4f1; --nightink:#7a3a63;
+  --dayp:#fff6f9; --nightp:#f9c6d8; --nightink:#8e2350; --nightmuted:#7e3d58;
   --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
   --body:"Nunito","Segoe UI",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#22131a; --surface:#2e1a23; --blush:#3c2230; --petal:#5a2f44;
-  --rose:#f08cb0; --deep:#ff9ec0; --ink:#fbe6ee; --muted:#d3a6b8; --line:#4a2a3a; --warn:#ff9f85; --dayp:#342029; --nightp:#2a1830; --nightink:#e7b6dc; color-scheme:dark}}
+  --rose:#f08cb0; --deep:#ff9ec0; --ink:#fbe6ee; --muted:#d3a6b8; --line:#4a2a3a; --warn:#ff9f85; --dayp:#4a2836; --nightp:#2a121c; --nightink:#ffb3cf; --nightmuted:#e0a3ba; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#22131a; --surface:#2e1a23; --blush:#3c2230; --petal:#5a2f44;
-  --rose:#f08cb0; --deep:#ff9ec0; --ink:#fbe6ee; --muted:#d3a6b8; --line:#4a2a3a; --warn:#ff9f85; --dayp:#342029; --nightp:#2a1830; --nightink:#e7b6dc; color-scheme:dark}
+  --rose:#f08cb0; --deep:#ff9ec0; --ink:#fbe6ee; --muted:#d3a6b8; --line:#4a2a3a; --warn:#ff9f85; --dayp:#4a2836; --nightp:#2a121c; --nightink:#ffb3cf; --nightmuted:#e0a3ba; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
@@ -28,7 +28,7 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1;text-wrap:balance}
 button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--rose);outline-offset:2px;border-radius:10px}
 
-header{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header{display:flex;align-items:center;gap:14px}
 .logo{width:58px;height:58px;border-radius:50%;background:var(--blush);display:grid;place-items:center;flex:none}
 .logo svg{width:48px}
 .brand{flex:1;min-width:0}
@@ -46,9 +46,9 @@ form.search:focus-within{border-color:var(--rose)}
 .primary:hover{filter:brightness(1.08)}
 .primary[disabled]{opacity:.6;cursor:progress}
 
-.status{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;color:var(--muted);font-size:13.5px}
+.status{display:flex;flex-wrap:wrap;justify-content:center;text-align:center;align-items:baseline;gap:4px 12px;color:var(--muted);font-size:13.5px}
 .status strong{color:var(--ink);font-family:var(--display);font-size:20px;font-weight:600}
-.note{background:var(--blush);border-radius:16px;padding:10px 14px;font-size:14px}
+.note{background:var(--blush);border-radius:16px;padding:10px 14px;font-size:14px;text-align:center}
 .note.err{color:var(--warn)}
 
 /* Today */
@@ -57,11 +57,23 @@ form.search:focus-within{border-color:var(--rose)}
 .periods{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .period{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0;border-radius:24px;padding:14px 12px 16px;background:var(--dayp);border:3px solid var(--line)}
 .period.night{background:var(--nightp)}
+.period.night .phead small,.period.night .rugcard .why,.period.night .temps .tl,.period.night .temps .hilo{color:var(--nightmuted)}
+.period.night .mi{color:var(--nightink)}
 .phead{display:flex;flex-direction:column;align-items:center;gap:0}
 .phead h3{display:flex;align-items:center;gap:6px;font-size:22px;font-weight:700;color:var(--deep)}
 .period.night .phead h3{color:var(--nightink)}
 .phead h3 .mi{width:20px;height:20px;color:currentColor}
-.phead small{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.phead small{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;display:inline-flex;align-items:center;gap:4px}
+.temps{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;padding-top:4px}
+.temps > div{display:flex;flex-direction:column;align-items:center;gap:0}
+.temps .tl{display:inline-flex;align-items:center;gap:4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--muted)}
+.temps b{font-family:var(--display);font-size:38px;font-weight:700;line-height:1.05;color:var(--deep);font-variant-numeric:tabular-nums}
+.temps .act b{color:var(--ink)}
+.period.night .temps b{color:var(--nightink)}
+.period.night .temps .act b{color:var(--ink)}
+.temps .hilo{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.temps .hilo span{display:inline-flex;align-items:center;gap:1px}
+.temps .hilo .mi{width:12px;height:12px}
 .today .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--rose);font-weight:700}
 .wx{display:flex;flex-direction:column;gap:10px;min-width:0}
 .wxtop{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
@@ -88,18 +100,25 @@ form.search:focus-within{border-color:var(--rose)}
 .badge.none{background:var(--surface);color:var(--deep);border:1.5px dashed var(--rose)}
 
 /* Week */
-.week h3,.prefs h3{font-size:22px;font-weight:600;margin-bottom:10px}
+.week h3,.prefs h3{font-size:22px;font-weight:600;margin-bottom:10px;text-align:center}
 .days{display:flex;flex-direction:column;gap:10px}
-.day{background:var(--surface);border-radius:22px;padding:10px 14px;display:grid;grid-template-columns:88px 56px minmax(0,1fr) auto;align-items:center;gap:12px}
+.day{background:var(--surface);border-radius:22px;padding:12px 14px;display:grid;grid-template-columns:120px minmax(0,1fr) auto;align-items:center;gap:12px;text-align:center}
+.day .dhead{display:flex;flex-direction:column;align-items:center;gap:0}
 .day .dname{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.1}
-.day .dname small{display:block;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--muted)}
+.day .dname small{display:block}
+.day .dname small{font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--muted)}
 .day .wicon{width:52px;height:52px}
 .day .dmid{min-width:0}
 .day .cond{font-weight:700}
-.day .meta{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.day .meta{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:center}
 .day .meta .mi{margin-right:3px}
-.day .meta .ms{display:inline-flex;align-items:center;gap:0;margin-right:10px;white-space:nowrap}
-.minis{display:flex;flex-wrap:wrap;gap:8px}
+.day .meta .ms{display:inline-flex;align-items:center;gap:0;margin-left:8px;white-space:nowrap}
+.day .meta .ms b{color:var(--ink);font-weight:700;margin:0 4px 0 3px}
+.wkhl{display:inline-flex;align-items:center;font-size:12px}
+.wkhl .mi{width:11px;height:11px;margin-right:0}
+.wkhl .mi:nth-of-type(2){margin-left:5px}
+.day .meta > b{margin-left:2px}
+.minis{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .mini{display:flex;flex-direction:column;align-items:center;gap:0;width:78px}
 .mini .pony{width:72px}
 .mini .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
@@ -107,22 +126,23 @@ form.search:focus-within{border-color:var(--rose)}
 
 /* Prefs */
 .prefs{background:var(--surface);border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:12px}
-.prefs p{margin:0 auto;color:var(--muted);font-size:14px;max-width:62ch;text-align:center}
+.prefs p{margin:0 auto;color:var(--muted);font-size:14px;max-width:76ch;text-align:center}
 .prefs h3{text-align:center}
 .preffoot{flex-direction:column;text-align:center}
 .rugrows{display:flex;flex-direction:column;gap:6px}
 .rugrow{display:grid;grid-template-columns:128px 56px minmax(0,1fr) 210px;align-items:center;gap:12px;padding:6px 10px;border-radius:16px;background:var(--blush)}
 .rugrow.off{opacity:.55}
 .rugrow .pony{width:56px}
-.rugrow label.have{display:flex;align-items:center;gap:8px;font-weight:700;min-width:98px}
+.rugrow label.have{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;min-width:98px}
+.rugrow .badge{min-width:80px;justify-content:center}
 .rugrow input[type=checkbox]{width:20px;height:20px;accent-color:var(--deep)}
 .rugrow{text-align:center}
 .rugrow .pony{justify-self:center}
 .rugrow .rule{font-size:14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
 .rugrow input[type=number]{width:68px;border:2px solid var(--line);border-radius:10px;background:var(--surface);padding:3px 8px;text-align:right;font-variant-numeric:tabular-nums}
 .rugrow input[type=number]:focus{border-color:var(--rose);outline:none}
-.preffoot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
-.warnline{color:var(--warn);font-size:13.5px;font-weight:600}
+.preffoot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
+.warnline{color:var(--warn);font-size:13.5px;font-weight:600;text-align:center}
 .saved{font-size:13px;color:var(--muted)}
 footer{color:var(--muted);font-size:12.5px;text-align:center}
 footer a{color:var(--deep)}
@@ -130,11 +150,8 @@ footer a{color:var(--deep)}
 @media (max-width:460px){.periods{grid-template-columns:1fr}}
 @media (max-width:620px){
   .today{padding:18px}
-  .day{grid-template-columns:52px minmax(0,1fr);grid-template-areas:"ic name" "ic mid" "rugs rugs";row-gap:4px}
-  .day .wicon{grid-area:ic}
-  .day .dname{grid-area:name}
-  .day .dmid{grid-area:mid}
-  .day .minis{grid-area:rugs;justify-content:flex-start}
+  .day{grid-template-columns:1fr;row-gap:6px}
+  .day .minis{justify-content:center}
   .mini{flex-direction:row;width:auto;gap:6px;background:var(--blush);border-radius:999px;padding:2px 10px 2px 4px}
   .mini .pony{width:48px}
   .rugrow{grid-template-columns:118px 48px minmax(0,1fr)}
@@ -151,7 +168,7 @@ footer a{color:var(--deep)}
     <div class="logo" id="logo" aria-hidden="true"></div>
     <div class="brand">
       <h1>Pony Rug Forecast</h1>
-      <p>Feels-like forecast, averaged across five weather models</p>
+      <p>Feels-like forecast with the right rug for day and night</p>
     </div>
     <button class="ghost" id="toPrefs" type="button">My rugs</button>
   </header>
@@ -174,16 +191,16 @@ footer a{color:var(--deep)}
 
   <section class="prefs" id="prefs">
     <h3>My rugs</h3>
-    <p>Tick the rugs your horse has, then set the coldest feels-like temperature you'd put each one on for. The forecast picks the lightest rug that covers the temperature. Changes apply straight away and are saved in this browser.</p>
+    <p>Tick the rugs your horse has, then set the coldest feels-like temperature you'd put each one on for.<br>The forecast picks the lightest rug that covers the temperature.<br>Changes apply straight away and are saved in this browser.</p>
     <div class="rugrows" id="rugrows"></div>
     <div class="warnline" id="orderWarn" hidden>Heavier rugs usually need lower temperatures. Check the numbers are in order.</div>
     <div class="preffoot">
-      <span class="saved" id="saved">Day rug uses the average feels-like between sunrise and sunset. Night rug uses the average feels-like from sunset to the next sunrise.</span>
+      <span class="saved" id="saved">Day rug uses the average feels-like between sunrise and sunset.<br>Night rug uses the average feels-like from sunset to the next sunrise.</span>
       <button class="ghost" id="reset" type="button">Reset to suggested</button>
     </div>
   </section>
 
-  <footer>Forecast data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (ECMWF, GFS, DWD ICON, Met Office, Météo-France models). Postcodes: <a href="https://postcodes.io/" target="_blank" rel="noopener">postcodes.io</a>. Always check your horse — a hand under the rug beats any forecast.</footer>
+  <footer>Forecast data: AccuWeather when opened in Claude; <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (ECMWF, GFS, DWD ICON, Met Office, Météo-France models) when hosted elsewhere. Postcodes: <a href="https://postcodes.io/" target="_blank" rel="noopener">postcodes.io</a>. Always check your horse — a hand under the rug beats any forecast.</footer>
 </div>
 
 <script>
@@ -261,13 +278,15 @@ function wxIcon(cat,label){return `<svg class="wicon" viewBox="0 0 64 64" role="
 function pony(w,{label=""}={}){
   const fill = RUG_FILL[w];
   const body="#c56a33", mane="#f5dfa3", hoof="#a9806b", white="#fffaf6";
+  const motif = w<=150 ? "#d94f86" : w===200 ? "#a8235e" : "#ffadc9";
+  const heart=(x,y,k)=>`<path transform="translate(${x} ${y}) scale(${k})" d="M0 -1.2c-1.6-2.8-5.4-1.2-3.8 2.1L0 4.2l3.8-3.3c1.6-3.3-2.2-4.9-3.8-2.1z" fill="${motif}"/>`;
+  const flower=(x,y,k)=>`<g transform="translate(${x} ${y}) scale(${k})"><g fill="${motif}"><circle cy="-2.7" r="1.9"/><circle cx="2.6" cy="-.8" r="1.9"/><circle cx="1.6" cy="2.2" r="1.9"/><circle cx="-1.6" cy="2.2" r="1.9"/><circle cx="-2.6" cy="-.8" r="1.9"/></g><circle r="1.4" fill="#ffd56b"/></g>`;
   const rug = fill ? `
     ${w>=300?`<path d="M79 46 L89 25 Q93 22 98 27 L91 52 Z" fill="${fill}" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>`:""}
     <path d="M29 42 Q33 33 58 33 Q80 33 88 43 L90 63 Q60 72 29 64 Z" fill="${fill}" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-    ${w>=150?`<g stroke="#ffffff" stroke-width="1.3" opacity=".45"><path d="M40 36 L52 66"/><path d="M54 34 L66 68"/><path d="M68 35 L80 66"/><path d="M33 50 L88 50"/></g>`:""}
-    <path d="M31 63 Q60 71 89 62" stroke="#ffffff" stroke-width="2.4" fill="none" opacity=".8"/>
-    <rect x="61" y="56" width="5" height="13" rx="2" fill="${OUT}" opacity=".55"/>
-    <path d="M47 46 c-2-3-7-1-5 3 l5 4 l5-4 c2-4-3-6-5-3z" fill="${w<=100?"#e8789f":"#ffffff"}" opacity=".9"/>`
+    <path d="M31 63 Q60 71 89 62" stroke="${motif}" stroke-width="2.2" fill="none" opacity=".75"/>
+    ${heart(41,45,1.25)}${flower(55,44,1)}${heart(72,48,1.1)}${flower(44,57,.8)}${heart(80,58,.85)}
+    <rect x="61" y="56" width="5" height="13" rx="2" fill="${OUT}" opacity=".45"/>`
     : "";
   return `<svg class="pony bob" viewBox="0 0 120 92" role="img" aria-label="${label||(w<0?'No rug':w+'g rug')}">
     <path d="M28 44 Q12 50 15 74 Q22 62 28 56 Z" fill="${mane}" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>
@@ -302,6 +321,11 @@ const MI = {
   drop:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8C6 5 4 7.2 4 9.8a4 4 0 0 0 8 0C12 7.2 10 5 8 1.8z" fill="currentColor"/></svg>`,
   wind:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 6h8.5a2 2 0 1 0-2-2"/><path d="M1.5 9.5h11a2 2 0 1 1-2 2"/></g></svg>`,
   rise:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 11a4.5 4.5 0 0 1 9 0z" fill="currentColor"/><path d="M1.5 13h13M8 2.5v2M3.3 5l1.2 1.2M12.7 5l-1.2 1.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  feel:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2.5a1.7 1.7 0 0 1 3.4 0v6.3a3.2 3.2 0 1 1-3.4 0z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7.7" cy="11.3" r="1.6" fill="currentColor"/><path d="M11.6 4.2q1.3 .8 0 1.8t0 1.8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  therm:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.3 2.5a1.7 1.7 0 0 1 3.4 0v6.3a3.2 3.2 0 1 1-3.4 0z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="11.3" r="1.6" fill="currentColor"/><path d="M8 5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  up:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3l4.5 6h-9z" fill="currentColor"/></svg>`,
+  down:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13l4.5-6h-9z" fill="currentColor"/></svg>`,
+  set:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 11a4.5 4.5 0 0 1 9 0z" fill="currentColor"/><path d="M1.5 13h13M8 2.5v3M6.3 4l1.7 1.6L9.7 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>`,
   range:`<svg class="mi" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 12l4-5 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 };
 
@@ -364,7 +388,7 @@ function summarise(models){
     const dayHigh=df.length?Math.max(...df):null, dayLow=df.length?Math.min(...df):null;
     const da=nums(dayH.map(h=>h.temp)), na=nums(nightH.map(h=>h.temp));
     const actDay=da.length?{avg:mean(da),hi:Math.max(...da),lo:Math.min(...da)}:null;
-    const actNight=na.length?{hi:Math.max(...na),lo:Math.min(...na)}:null;
+    const actNight=na.length?{avg:mean(na),hi:Math.max(...na),lo:Math.min(...na)}:null;
     const nf=nums(nightH.map(h=>h.feels)); const nightFeels=nf.length?mean(nf):null; const nightLow=nf.length?Math.min(...nf):null; const nightHigh=nf.length?Math.max(...nf):null;
     // weather: weighted vote across daytime hours and models
     const score={};dayH.forEach(h=>h.codes.forEach(c=>{const k=codeCat(c);score[k]=(score[k]||0)+(["rain","snow","thunder","drizzle"].includes(k)?1.6:1)}));
@@ -383,7 +407,7 @@ function exampleData(){
   const base=new Date();base.setHours(12,0,0,0);
   const rows=[[ "partly",8.5,1.5,6,11,0.4,12],["rain",6,3.5,8,10,7.2,22],["cloudy",9,6,10,12,0.6,14],["clear",7,-1.5,9,10,0,8],["fog",4,-3,6,7,0.1,5],["drizzle",5.5,2,7,9,1.8,11],["snow",1,-5,2,4,3.4,18]];
   return rows.map((r,i)=>{const d=new Date(base);d.setDate(d.getDate()+i);
-    return {date:d.toISOString().slice(0,10),cat:r[0],dayFeels:r[1],nightFeels:r[2],nightLow:r[2]-2,dayHigh:r[1]+2.5,dayLow:r[1]-2,nightHigh:r[2]+3.5,actDay:{avg:r[1]+2.5,hi:r[1]+5,lo:r[1]},actNight:{lo:r[2]+2.5,hi:r[2]+6},feelsMin:Math.min(r[1],r[2])-0.5,feelsMax:r[1]+2,tempMin:r[2]+2,tempMax:r[4],rain:r[5],wind:r[6],spread:[r[2]-1.5,r[2]+1.2],nightLabel:true,riseT:"07:0"+i,setT:"16:"+(35-i)}});
+    return {date:d.toISOString().slice(0,10),cat:r[0],dayFeels:r[1],nightFeels:r[2],nightLow:r[2]-2,dayHigh:r[1]+2.5,dayLow:r[1]-2,nightHigh:r[2]+3.5,actDay:{avg:r[1]+2.5,hi:r[1]+5,lo:r[1]},actNight:{avg:r[2]+4,lo:r[2]+2.5,hi:r[2]+6},feelsMin:Math.min(r[1],r[2])-0.5,feelsMax:r[1]+2,tempMin:r[2]+2,tempMax:r[4],rain:r[5],wind:r[6],spread:[r[2]-1.5,r[2]+1.2],nightLabel:true,riseT:"07:0"+i,setT:"16:"+(35-i)}});
 }
 
 /* ---------- render ---------- */
@@ -404,37 +428,51 @@ function render(){
     : `<div class="rugcard">${pony(w)}${badge(w)}<span class="why">${rugKind(w)}</span></div>`;
   const border=w=>w!=null&&w>=0?`border-color:${RUG_FILL[w]}`:"";
   const nextRise=days[1]?days[1].riseT:null;
+  const hilo=(hi,lo)=>(hi==null&&lo==null)?"":`<span class="hilo">${hi!=null?`<span>${MI.up}${fmt(hi)}</span>`:""}${lo!=null?`<span>${MI.down}${fmt(lo)}</span>`:""}</span>`;
+  const temps=(kind,feels,fHi,fLo,act,peakWord)=> kind==="peak"
+    ? `<div class="temps">
+        <div><span class="tl">${MI.feel}Feels ${peakWord}</span><b>${fmt(feels)}</b></div>
+        <div class="act"><span class="tl">${MI.therm}Actual ${peakWord}</span><b>${fmt(act&&(peakWord==="high"?act.hi:act.lo))}</b></div>
+      </div>`
+    : `<div class="temps">
+        <div><span class="tl">${MI.feel}Feels avg</span><b>${fmt(feels)}</b>${hilo(fHi,fLo)}</div>
+        <div class="act"><span class="tl">${MI.therm}Actual avg</span><b>${fmt(act&&act.avg)}</b>${act?hilo(act.hi,act.lo):""}</div>
+      </div>`;
   $("today").innerHTML=`
     <div class="tophead">
       <span class="eyebrow">${dayName(t.date,0).join(" · ")}</span>
       <div class="wxtop">${wxIcon(t.cat,WX[t.cat].label)}<h2>${WX[t.cat].label}</h2></div>
       <div class="facts">
-        <span class="chip">${MI.drop}Rain ${t.rain.toFixed(1)} mm</span>
-        <span class="chip">${MI.wind}Wind up to ${Math.round(t.wind)} mph</span>
-        ${t.spread?`<span class="chip" title="Each of the weather models makes its own forecast. This is the range of tonight's average feels-like temperature between them. A narrow range means they agree.">${MI.range}Tonight's average across models: ${fmt(t.spread[0])} to ${fmt(t.spread[1])}</span>`:""}
+        <span class="chip">${MI.drop}${t.rain.toFixed(1)} mm</span>
+        <span class="chip">${MI.wind}${Math.round(t.wind)} mph</span>
+        ${t.spread?`<span class="chip" title="Range of tonight's average feels-like between the weather models. A narrow range means they agree.">${MI.range}Models ${fmt(t.spread[0])}–${fmt(t.spread[1])}</span>`:""}
       </div>
     </div>
     <div class="periods">
       <div class="period" style="${border(dRug)}">
-        <div class="phead"><h3>${MI.sun}Day rug</h3><small>Sunrise ${t.riseT} to sunset ${t.setT}</small></div>
+        <div class="phead"><h3>${MI.sun}Day rug</h3><small>${MI.rise}${t.riseT}–${t.setT}</small></div>
         ${rugCard(dRug)}
-        <div class="feels"><b>${fmt(t.dayFeels)}</b><span class="plbl">Average feels like</span><span class="hl">Feels high ${fmt(t.dayHigh)} · low ${fmt(t.dayLow)}</span>${t.actDay?`<span class="act">Actual avg ${fmt(t.actDay.avg)} · high ${fmt(t.actDay.hi)} · low ${fmt(t.actDay.lo)}</span>`:""}</div>
+        ${temps(t.dayKind,t.dayFeels,t.dayHigh,t.dayLow,t.actDay,"high")}
       </div>
       ${t.nightFeels!=null?`<div class="period night" style="${border(nRug)}">
-        <div class="phead"><h3>${MI.moon}Night rug</h3><small>Sunset ${t.setT}${nextRise?` to sunrise ${nextRise}`:""}</small></div>
+        <div class="phead"><h3>${MI.moon}Night rug</h3><small>${MI.set}${t.setT}${nextRise?`–${nextRise}`:""}</small></div>
         ${rugCard(nRug)}
-        <div class="feels"><b>${fmt(t.nightFeels)}</b><span class="plbl">Average feels like</span><span class="hl">Feels high ${fmt(t.nightHigh)} · low ${fmt(t.nightLow)}</span>${t.actNight?`<span class="act">Actual high ${fmt(t.actNight.hi)} · low ${fmt(t.actNight.lo)}</span>`:""}</div>
+        ${temps(t.nightKind,t.nightFeels,t.nightHigh,t.nightLow,t.actNight,"low")}
       </div>`:""}
     </div>`;
+  // compact: [feels icon] avg ▲hi ▼lo   [thermometer] avg ▲hi ▼lo
+  const hl=(hi,lo)=>`<span class="wkhl">${MI.up}${fmt(hi)} ${MI.down}${fmt(lo)}</span>`;
+  const wkLine=(kind,feels,fHi,fLo,act,which)=> kind==="peak"
+    ? `<span class="ms" title="Feels like ${which==="hi"?"high":"low"}">${MI.feel}Feels ${which==="hi"?"high":"low"} <b>${fmt(feels)}</b></span><span class="ms" title="Actual ${which==="hi"?"high":"low"}">${MI.therm}Actual ${which==="hi"?"high":"low"} <b>${fmt(act&&act[which])}</b></span>`
+    : `<span class="ms" title="Feels like: average, high, low">${MI.feel}Feels <b>${fmt(feels)}</b>${hl(fHi,fLo)}</span>${act?`<span class="ms" title="Actual: average, high, low">${MI.therm}Actual <b>${fmt(act.avg)}</b>${hl(act.hi,act.lo)}</span>`:""}`;
   $("days").innerHTML=days.slice(1).map((d,k)=>{
     const [n,sub]=dayName(d.date,k+1); const dw=pickRug(d.dayFeels), nw=pickRug(d.nightFeels);
     const mini=(lbl,w)=>w==null?"":`<div class="mini" title="${lbl}: ${w<0?"no rug":w+"g "+rugKind(w).toLowerCase()}">${pony(w)}<span class="lbl">${lbl}</span>${badge(w)}</div>`;
     return `<article class="day">
-      <div class="dname">${n}<small>${sub}</small></div>
-      ${wxIcon(d.cat,WX[d.cat].label)}
-      <div class="dmid"><div class="cond">${WX[d.cat].label}</div>
-        <div class="meta">${MI.sun}<b>Day</b> feels ${fmt(d.dayLow)} to ${fmt(d.dayHigh)}, avg ${fmt(d.dayFeels)}${d.actDay?` · actual ${fmt(d.actDay.lo)} to ${fmt(d.actDay.hi)}`:""}</div>
-        ${d.nightFeels!=null?`<div class="meta">${MI.moon}<b>Night</b> feels ${fmt(d.nightLow)} to ${fmt(d.nightHigh)}, avg ${fmt(d.nightFeels)}${d.actNight?` · actual ${fmt(d.actNight.lo)} to ${fmt(d.actNight.hi)}`:""}</div>`:""}
+      <div class="dhead"><div class="dname">${n}<small>${sub}</small></div>${wxIcon(d.cat,WX[d.cat].label)}<div class="cond">${WX[d.cat].label}</div></div>
+      <div class="dmid">
+        <div class="meta">${MI.sun}<b>Day</b> ${wkLine(d.dayKind,d.dayFeels,d.dayHigh,d.dayLow,d.actDay,"hi")}</div>
+        ${d.nightFeels!=null?`<div class="meta">${MI.moon}<b>Night</b> ${wkLine(d.nightKind,d.nightFeels,d.nightHigh,d.nightLow,d.actNight,"lo")}</div>`:""}
         <div class="meta"><span class="ms">${MI.rise}${d.riseT}–${d.setT}</span><span class="ms">${MI.drop}${d.rain.toFixed(1)} mm</span><span class="ms">${MI.wind}${Math.round(d.wind)} mph</span></div></div>
       <div class="minis">${mini("Day",dw)}${d.nightFeels!=null?mini("Night",nw):""}</div>
     </article>`;
@@ -444,7 +482,7 @@ function setStatus(){
   const s=$("status"); s.textContent="";
   const strong=document.createElement("strong"); strong.textContent=current.place; s.appendChild(strong);
   if(current.area){const a=document.createElement("span");a.textContent=current.area;s.appendChild(a)}
-  const m=document.createElement("span"); m.textContent=current.example?"Sample numbers, not a real forecast":"Averaged from "+current.models.join(", ")+" · updated "+new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}); s.appendChild(m);
+  const m=document.createElement("span"); m.textContent=current.example?"Sample numbers, not a real forecast":(current.source==="accu"?"Live from AccuWeather":"Averaged from "+current.models.join(", "))+" · updated "+new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}); s.appendChild(m);
 }
 function showNote(msg,err){const n=$("note");n.textContent=msg;n.classList.toggle("err",!!err);n.hidden=!msg}
 
@@ -475,17 +513,106 @@ $("rugrows").addEventListener("input",e=>{
   $("orderWarn").hidden=!bad;
 });
 $("reset").addEventListener("click",()=>{prefs=defaultPrefs();save();renderPrefs();render();flash("Reset to suggested temperatures")});
-let flashT;function flash(msg){const s=$("saved");const orig="Day rug uses the average feels-like between sunrise and sunset. Night rug uses the average feels-like from sunset to the next sunrise.";s.textContent=msg;clearTimeout(flashT);flashT=setTimeout(()=>s.textContent=orig,2200)}
+let flashT;function flash(msg){const s=$("saved");const orig=s.dataset.orig||(s.dataset.orig=s.innerHTML);s.textContent=msg;clearTimeout(flashT);flashT=setTimeout(()=>s.innerHTML=orig,2200)}
 function save(){store.set("prr.prefs",prefs)}
 $("toPrefs").addEventListener("click",()=>$("prefs").scrollIntoView({behavior:"smooth",block:"start"}));
+
+/* ---------- AccuWeather (via the viewer's Claude connector) ---------- */
+const ACCU="AccuWeather";
+const mcpReady=(window.claude&&typeof window.claude.use==="function")?window.claude.use("mcp").catch(()=>null):Promise.resolve(null);
+function accuCat(i){
+  if([1,2,30,31,33,34].includes(i)) return "clear";
+  if([3,4,5,35,36,37].includes(i)) return "partly";
+  if([6,7,8,32,38].includes(i)) return "cloudy";
+  if(i===11) return "fog";
+  if([12,13,14,18,26,39,40].includes(i)) return "rain";
+  if([15,16,17,41,42].includes(i)) return "thunder";
+  if([19,20,21,22,23,24,25,29,43,44].includes(i)) return "snow";
+  return "cloudy";
+}
+const kmhToMph=v=>v*0.621371;
+function windMph(str){const m=/([\d.]+)\s*(km\/h|mph)/i.exec(str||"");if(!m)return 0;const v=parseFloat(m[1]);return /mph/i.test(m[2])?v:kmhToMph(v)}
+// sunrise/sunset from latitude and longitude (standard sunrise equation)
+function sunTimes(iso,lat,lon,tz){
+  const rad=Math.PI/180, J=new Date(iso+"T12:00:00Z").getTime()/864e5+2440587.5;
+  const n=Math.round(J-2451545+0.0008), Js=n-lon/360;
+  const M=(357.5291+0.98560028*Js)%360, Mr=M*rad;
+  const C=1.9148*Math.sin(Mr)+0.02*Math.sin(2*Mr)+0.0003*Math.sin(3*Mr);
+  const L=((M+C+180+102.9372)%360)*rad;
+  const Jt=2451545+Js+0.0053*Math.sin(Mr)-0.0069*Math.sin(2*L);
+  const dec=Math.asin(Math.sin(L)*Math.sin(23.4397*rad)), phi=lat*rad;
+  const cw=(Math.sin(-0.833*rad)-Math.sin(phi)*Math.sin(dec))/(Math.cos(phi)*Math.cos(dec));
+  if(cw>1||cw<-1) return {riseT:"–",setT:"–"};
+  const w=Math.acos(cw)/rad/360, f=j=>new Date((j-2440587.5)*864e5).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:tz||undefined});
+  return {riseT:f(Jt-w),setT:f(Jt+w)};
+}
+async function accuCall(mcp,tool,qp){
+  const res=await mcp.callTool(ACCU,tool,{queryParams:qp},{cache:{staleTime:10*60*1000,gcTime:60*60*1000}});
+  return res.payload;
+}
+async function loadAccu(q,mcp){
+  const found=await accuCall(mcp,"widgets-search-claude",{query:q});
+  const hit=found&&found.results&&found.results[0];
+  if(!hit){const e=new Error("notfound");e.notfound=true;throw e}
+  const key=String(hit.locationKey);
+  const [daily,hourly]=await Promise.all([
+    accuCall(mcp,"widgets-todayTonightForecast-claude",{locationKey:key,unit:"metric",lang:"en",days:7}),
+    accuCall(mcp,"widgets-hourly-claude",{locationKey:key,unit:"metric",lang:"en"}).catch(()=>null)
+  ]);
+  const loc=(daily&&daily.location)||{}, info=loc.info||{}, tz=loc.timeZoneName;
+  const list=(daily&&daily.dailyForecast)||[];
+  if(!list.length) throw new Error("noforecast");
+  const hrs=((hourly&&hourly.hourlyForecast)||[]).map(h=>({date:String(h.date).slice(0,10),day:!!h.isDayLight,feels:h.realFeelValue,temp:h.temperatureValue}));
+  const days=list.map((x,i)=>{
+    const date=String(x.date).slice(0,10), D=x.day||{}, N=x.night||{};
+    const sun=info.latitude!=null?sunTimes(date,info.latitude,info.longitude,tz):{riseT:"–",setT:"–"};
+    const rain=((D.extended||{}).rainValue||0)+((N.extended||{}).rainValue||0);
+    const d={date,cat:accuCat(D.icon),riseT:sun.riseT,setT:sun.setT,rain,
+      wind:Math.max(windMph((D.extended||{}).wind),windMph((N.extended||{}).wind)),
+      dayFeels:D.realFeelValue,dayKind:"peak",actDay:{hi:D.temperature},
+      nightFeels:N.realFeelValue,nightKind:"peak",actNight:{lo:N.temperature},
+      spread:null,nightLabel:true};
+    if(i===0){
+      // AccuWeather's hourly forecast covers the next 12 hours: where it covers a period, use a true average
+      const dh=hrs.filter(h=>h.date===date&&h.day), nh=hrs.filter(h=>!h.day);
+      const nn=a=>nums(a), stat=a=>({avg:mean(a),hi:Math.max(...a),lo:Math.min(...a)});
+      if(dh.length>=3){const f=nn(dh.map(h=>h.feels)),a=nn(dh.map(h=>h.temp)),sf=stat(f);
+        Object.assign(d,{dayFeels:sf.avg,dayHigh:sf.hi,dayLow:sf.lo,dayKind:"avg",actDay:a.length?stat(a):null});}
+      if(nh.length>=4){const f=nn(nh.map(h=>h.feels)),a=nn(nh.map(h=>h.temp)),sf=stat(f);
+        Object.assign(d,{nightFeels:sf.avg,nightHigh:sf.hi,nightLow:sf.lo,nightKind:"avg",actNight:a.length?stat(a):null});}
+    }
+    return d;
+  });
+  return {place:hit.name||loc.localizedName||q,area:"",models:["AccuWeather"],source:"accu",days,example:false};
+}
+function accuError(e){
+  switch(e&&e.code){
+    case "server_not_connected": case "server_not_found":
+      return "Live forecasts here come from AccuWeather. Add the AccuWeather connector in claude.ai Settings → Connectors, then search again.";
+    case "needs_reauth": return "AccuWeather needs reconnecting. Reconnect it in claude.ai Settings → Connectors, then search again.";
+    case "not_in_manifest": case "approval_required": case "consent_required":
+      return "This page needs your permission to use AccuWeather. Search again and choose Allow when asked.";
+    case "selection_required": return "You have more than one AccuWeather connector. Choose one when Claude asks, then search again.";
+    case "blocked_by_policy": return "Your organisation's settings block AccuWeather for this page.";
+    case "server_unavailable": case "rate_limited": return "AccuWeather didn't respond. Try again in a minute.";
+    case "tool_error": return "AccuWeather couldn't return a forecast for that place. Try a full postcode or a town name.";
+    default: return "AccuWeather didn't return a forecast. Try again in a minute.";
+  }
+}
 
 /* ---------- search ---------- */
 async function load(q){
   const btn=$("go"); btn.disabled=true; btn.textContent="Fetching…"; showNote("");
   try{
-    const loc=await geocode(q);
-    const models=await fetchModels(loc.lat,loc.lon);
-    current={place:loc.name,area:loc.area,models:models.map(m=>m.name),days:summarise(models),example:false};
+    const mcp=await mcpReady;
+    if(mcp){
+      try{ current=await loadAccu(q,mcp); }
+      catch(e){ if(e.notfound) throw e; if(e&&e.code){showNote(accuError(e),true);return;} throw e; }
+    }else{
+      const loc=await geocode(q);
+      const models=await fetchModels(loc.lat,loc.lon);
+      current={place:loc.name,area:loc.area,models:models.map(m=>m.name),days:summarise(models),example:false};
+    }
     store.set("prr.last",q); setStatus(); render();
   }catch(e){
     if(e.notfound) showNote("We couldn't find “"+q+"”. Check the postcode and try again, or try a town name.",true);
